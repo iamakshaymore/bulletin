@@ -78,7 +78,7 @@ if (isset($_POST['login'])) {
 			 		case 'faculty':
 			 			header('location:./facultyHome.php');
 			 			break;
-			 		case 'universityAdmin':
+			 		case 'universityadmin':
 			 			header('location:./universityAdminHome.php');
 			 			break;
 			 	} 	
