@@ -1,0 +1,21 @@
+.jumbotron {
+    background-color: #fff;
+}
+#errors {
+    background-color: red;
+    margin-top: 2%;
+    padding: 3%;
+    color: white;
+}
+.userDetails{
+    border: solid 1px #c1c1c1;
+    padding: 5%;
+}
+.universityDetails{
+	border: solid 1px #c1c1c1;
+    padding: 5%;
+}
+.buttonMargin{
+	margin-top: 2%;
+	width: 100%;
+}
