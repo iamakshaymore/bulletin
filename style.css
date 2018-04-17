@@ -1,11 +1,19 @@
 .jumbotron {
     background-color: #fff;
+    padding-top: 0%;
+    padding-bottom: 0%;
 }
 #errors {
-    background-color: red;
     margin-top: 2%;
     padding: 3%;
-    color: white;
+    color: red;
+    text-align: center;
+
+}
+.errors {
+    color: red;
+    text-align: center;
+    margin-top: 1%;
 }
 .userDetails{
     border: solid 1px #c1c1c1;
@@ -18,4 +26,63 @@
 .buttonMargin{
 	margin-top: 2%;
 	width: 100%;
+}
+.header{
+    text-align: center;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+
+.btn-primary {
+    color: #fff;
+    background-color: #7ed6e6;
+    border-color: #ffffff;
+}
+.btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .open>.dropdown-toggle.btn-primary.focus, .open>.dropdown-toggle.btn-primary:focus, .open>.dropdown-toggle.btn-primary:hover {
+    color: #fff;
+    background-color: #efae5a;
+    border-color: #ffffff;
+}
+.btn-primary.active, .btn-primary:active, .open>.dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #7ed6e6;
+    border-color: #ffffff;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #efae5a;
+    border-color: #ffffff;
+}
+.btn-primary.focus, .btn-primary:focus {
+    color: #fff;
+    background-color: #efae5a;
+    border-color: #ffffff;
+}
+
+
+.btn-default {
+    color: #fff;
+    background-color: #efae5a;
+    border-color: #ffffff;
+}
+.btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover, .btn-default:active.focus, .btn-default:active:focus, .btn-default:active:hover, .open>.dropdown-toggle.btn-default.focus, .open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover {
+    color: #fff;
+    background-color: #7ed6e6;
+    border-color: #ffffff;
+}
+.btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default {
+    color: #fff;
+    background-color: #efae5a;
+    border-color: #ffffff;
+}
+.btn-default:hover {
+    color: #fff;
+    background-color: #7ed6e6;
+    border-color: #ffffff;
+}
+.btn-default.focus, .btn-default:focus {
+    color: #fff;
+    background-color: #7ed6e6;
+    border-color: #ffffff;
 }

@@ -10,6 +10,9 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<div class="header">
+		<img src="./assets/logo.png">
+	</div>
 	<div class="jumbotron text-center">
 		<div class="container">
 	  		<div class="row">
@@ -39,32 +42,32 @@
 						<h4>Personal Details (University Admin)</h4>
 						<div class="form-group">
 	   						<label for="firstName">First Name:</label>
-	   						<input type="text" class="form-control" name="firstName" required>
+	   						<input type="text" class="form-control" name="adminFirstName" required>
 						</div>
 
 						<div class="form-group">
 	   						<label for="lastName">Last Name:</label>
-	   						<input type="text" class="form-control" name="lastName" required>
+	   						<input type="text" class="form-control" name="adminLastName" required>
 						</div>
 
   						<div class="form-group">
     						<label for="phone">Phone:</label>
-    						<input type="tel" class="form-control" name="phone" required>
+    						<input type="tel" class="form-control" name="adminPhone" required>
   						</div>
 
   						<div class="form-group">
     						<label for="email">Email address:</label>
-    						<input type="email" class="form-control" name="email" required>
+    						<input type="email" class="form-control" name="adminEmail" id="adminEmail" required>
   						</div>
 
   						<div class="form-group">
     						<label for="email">Password:</label>
-    						<input type="Password" class="form-control" name="password" required>
+    						<input type="Password" class="form-control" name="adminPassword" id="adminPassword" required minlength=5>
   						</div>
 
   						<div class="form-group">
     						<label for="email">Confirm Password:</label>
-    						<input type="Password" class="form-control" name="confirmPassword" required>
+    						<input type="Password" class="form-control" name="adminConfirmPassword" id="adminConfirmPassword" minlength=5 required>
   						</div>
   					</div>
 				</div>
@@ -89,20 +92,81 @@
 
 						<div class="form-group">
 	  						<label for="universityDomain">University Email:</label>
-	  						<input type="email" class="form-control" name="universityEmail" required>
+	  						<input type="email" class="form-control" name="universityEmail" id="universityEmail" required>
 						</div>
 
 						<div class="form-group">
 	   						<label for="universityDomain">University Domain:</label>
-	   						<input type="text" class="form-control" name="universityDomain" required>
+	   						<input type="text" class="form-control" name="universityDomain" id="universityDomain" required>
 						</div>
 					</div>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-success buttonMargin" name="universityRegistrationForm">Register</button>
+			<button type="submit" class="btn btn-primary buttonMargin" name="universityRegistrationForm">Register</button>
+			<div class="errors">
+				<ul id="universityErrors">
+				</ul>
+			</div>
 		</div>
 	</div>
 </form>
+
+<script type="text/javascript">
+	$('#errors').hide();
+	$(document).ready(function(){
+    $("#universityRegistrationForm").on('submit',function(e){
+    	e.preventDefault();
+    	var form=this;
+    	$('#universityErrors').html("");
+    	var universityEmail=$('#universityEmail').val();
+    	var adminEmail=$("#adminEmail").val();
+    	var universityDomain=$("#universityDomain").val();
+    	universityEmail=universityEmail.split('@');
+    	adminEmail=adminEmail.split('@');
+    	var password=$('#adminPassword').val();
+    	var confirmPassword=$('#adminConfirmPassword').val();
+    	if (universityDomain==universityEmail[1] && universityEmail[1]==adminEmail[1] && universityDomain==adminEmail[1]) {
+    		$.ajax({
+    			context:this,
+        		type: "GET",
+				url: "./functions/functions.php?domain="+universityDomain,
+				dataType: "xml",
+				success: function(xml) {
+					$(xml).find('login').each(function(){
+		      			var status = $(this).find('status').text();
+		      			if (status=="false") {
+		      				var password=$('#adminPassword').val();
+    						var confirmPassword=$('#adminConfirmPassword').val();
+    						if (password===confirmPassword) {
+		      					form.submit();
+		      				}
+		      				else{
+		      					$('errors').show();
+		      					$('#universityErrors').append('<li>Passwords Do Not Match</li>');
+		      				}
+		      			}
+		      			else{
+		      				$('errors').show();
+		      				$('#universityErrors').append('<li>University Already Exists.</li>');
+		      			}
+		      			
+		      			
+		      		});
+
+				}
+			});
+			//e.preventDefault(); 
+    	}
+    	else{
+    		$('errors').show();
+    		$("#universityErrors").append("<li>Your email Id's domain name ("+adminEmail[1]+"), the domain name of the email Id of your university ("+universityEmail[1]+") and the domain name of your university ("+universityDomain+") should match</li>");
+    			e.preventDefault();
+    	}
+
+    
+    });
+});
+</script>
 
 
 <form id="facultyRegistrationForm" method="POST" action="#">
@@ -132,20 +196,22 @@
     						<label for="email">Email address:</label>
     						<input placeholder="johndoe@abc.edu" type="email" class="form-control" name="facultyEmail" id="facultyEmail" required>
   						</div>
-  						<span id="notfound" style="color: red"></span>
-  						<span id="found" style="color: green"></span>
 
   						<div class="form-group">
-    						<label for="email">Password:</label>
-    						<input type="Password" class="form-control" name="password" required>
+    						<label for="password">Password:</label>
+    						<input pattern=".{3,}" title="3 characters minimum" type="password" class="form-control" name="password" id="password" required>
   						</div>
 
   						<div class="form-group">
-    						<label for="email">Confirm Password:</label>
-    						<input type="Password" class="form-control" name="confirmPassword" required>
+    						<label for="password">Confirm Password:</label>
+    						<input type="Password" class="form-control" name="confirmPassword" id="confirmPassword" required>
   						</div>
 
-  						<button type="submit" id="facultyRegButton" name="facultyRegistrationForm" class="buttonMargin btn btn-success">Register</button>	
+  						<button type="submit" id="facultyRegButton" name="facultyRegistrationForm" class="buttonMargin btn btn-primary">Register</button>
+  						<div id="errors">
+  							<ol id="errorList">	
+  							</ol>
+  						</div>	
 				</div>
 			</div>
 		</div>
@@ -155,6 +221,7 @@
 
 
 <script type="text/javascript">
+
 $('#facultyRegistrationForm').hide();
 $(document).ready(function(){
 	$('#registrationType').on('change', function (e) {
@@ -169,39 +236,54 @@ $(document).ready(function(){
 	    	$('#facultyRegistrationForm').hide();
 	    }
 	});
+		      			
 
-	$( "#facultyEmail" ).focusout(function() {
+	$( "#facultyRegistrationForm" ).submit(function(e) {
+		$('#errorList').html('');
+		e.preventDefault();
 		var email = $('#facultyEmail').val();
-		if(email.includes('@')){
-			var domain=email.split("@");
+		var domain=email.split("@");
+		var errors="";
+
+		
 			$.ajax({
-    			type: "GET",
-    			url: "./functions/functions.php?domain="+domain[1],
-    			dataType: "xml",
-    			success: function(xml){
-    			$(xml).find('login').each(function(){
-      				var status = $(this).find('status').text();
-      				if(status=="true"){
-      					$('#found').text('University Found');
-      					$('#notfound').text("");
-      					$("#facultyRegButton").prop("disabled",false);
-      				}
-      				else{
-      					$('#notfound').text('University Not Found');
-      					$('#found').text('');
-      					$("#facultyRegButton").prop("disabled",true);
-      				}
+	    		type: "GET",
+	    		url: "./functions/functions.php?domain="+domain[1],
+	    		dataType: "xml",
+	    		success: function(xml){
+		    		$(xml).find('login').each(function(){
+		      			var status = $(this).find('status').text();
+		      			if(status=='false'){
+		      				errors="University with Domain Name "+domain[1]+" Not Found.";
+		      				$("#errorList").append("<li>"+errors+"</li>");
+		      			}
+		      			var password=$('#password').val();
+						var confirmPassword=$('#confirmPassword').val();
+		      			if (password!==confirmPassword) {
+		      				errors="Passwords Do Not Match";
+		      				$("#errorList").append("<li>"+errors+"</li>");
+		      			}
 
-    });
-  },
-  error: function() {
-    alert("An error occurred while processing XML file.");
-  }
-  });
-		}
+		      			if($('#errorList').children().length==0){
+		      				$('#facultyRegistrationForm').submit();
+		      			}
+		      			
 
+		    		});
+
+	  			},
+				error: function() {
+					alert("An error occurred while processing XML file.");
+				}
+	  		});
 	});
+
+
+
+
 });
+
+
 </script>
 </body>
 </html>

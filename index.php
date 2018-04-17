@@ -21,7 +21,9 @@ $(document).ready(function(){
 });
 </script>
 
-
+<div class="header">
+	<img src="./assets/logo.png">
+</div>
 <div class="jumbotron text-center">
 	<div class="container">
 	  <div class="row">
@@ -42,7 +44,7 @@ $(document).ready(function(){
   				</div>
   				<button type="submit" class="btn btn-primary buttonMargin" name="login">Login</button>
 	    	</form>
-	    	<a href="./register.php"><button class="btn btn-success buttonMargin">Register</button></a>
+	    	<a href="./register.php"><button class="btn btn-default buttonMargin">Register</button></a>
 	    	<div id="errors"></div>
 	    </div>
 	    <div class="col-sm-4">
@@ -73,13 +75,13 @@ if (isset($_POST['login'])) {
         if($found=="true"){
 			switch ($userRole) {
 			 		case 'student':
-			 			header('location:./studentHome.php');
+			 			header('location:./student');
 			 			break;
 			 		case 'faculty':
-			 			header('location:./facultyHome.php');
+			 			header('location:./faculty');
 			 			break;
 			 		case 'universityadmin':
-			 			header('location:./universityAdminHome.php');
+			 			header('location:./admin');
 			 			break;
 			 	} 	
         }
