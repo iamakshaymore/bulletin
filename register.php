@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Bulletin | Registration</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -33,7 +33,7 @@
 	    </div>
 	</div>
 
-<form id="universityRegistrationForm" method="POST" action="#">
+<form id="universityRegistrationForm" method="POST" action="./emailVerification.php">
 	<div class="jumbotron text-center">
 		<div class="container">
 			<div class="row">
@@ -42,27 +42,27 @@
 						<h4>Personal Details (University Admin)</h4>
 						<div class="form-group">
 	   						<label for="firstName">First Name:</label>
-	   						<input type="text" class="form-control" name="adminFirstName" required>
+	   						<input placeholder="John" type="text" class="form-control" name="adminFirstName" required>
 						</div>
 
 						<div class="form-group">
 	   						<label for="lastName">Last Name:</label>
-	   						<input type="text" class="form-control" name="adminLastName" required>
+	   						<input type="text" placeholder="Doe" class="form-control" name="adminLastName" required>
 						</div>
 
   						<div class="form-group">
     						<label for="phone">Phone:</label>
-    						<input type="tel" class="form-control" name="adminPhone" required>
+    						<input type="tel" placeholder="551XXXXX83" class="form-control" name="adminPhone" required>
   						</div>
 
   						<div class="form-group">
     						<label for="email">Email address:</label>
-    						<input type="email" class="form-control" name="adminEmail" id="adminEmail" required>
+    						<input type="email" placeholder="johndoe@universityName.edu" class="form-control" name="email" id="adminEmail" required>
   						</div>
 
   						<div class="form-group">
     						<label for="email">Password:</label>
-    						<input type="Password" class="form-control" name="adminPassword" id="adminPassword" required minlength=5>
+    						<input type="Password" class="form-control" placeholder="Minimum 5 characters" name="adminPassword" id="adminPassword" required minlength=5>
   						</div>
 
   						<div class="form-group">
@@ -77,27 +77,27 @@
 						<h4>University Details</h4>
 						<div class="form-group">
 							<label for="universityName">University Name:</label>
-							<input type="text" class="form-control" name="universityName" required>
+							<input type="text" placeholder="Pace University" class="form-control" name="universityName" required>
 						</div>
 
 						<div class="form-group">
 	   						<label for="universityAddress">University Address:</label>
-	  						<input type="text" class="form-control" name="universityAddress" required>
+	  						<input type="text" placeholder="1 Pace Plaza, New York, NY 10038" class="form-control" name="universityAddress" required>
 						</div>
 
 						<div class="form-group">
 	  						<label for="universityPhone">University Phone:</label>
-	   						<input type="tel" class="form-control" name="universityPhone" required>
+	   						<input type="tel" placeholder="501XXXXX23" class="form-control" name="universityPhone" required>
 						</div>
 
 						<div class="form-group">
 	  						<label for="universityDomain">University Email:</label>
-	  						<input type="email" class="form-control" name="universityEmail" id="universityEmail" required>
+	  						<input type="email" class="form-control" placeholder="admin@sameDomainAsYourEmailid.edu" name="universityEmail" id="universityEmail" required>
 						</div>
 
 						<div class="form-group">
 	   						<label for="universityDomain">University Domain:</label>
-	   						<input type="text" class="form-control" name="universityDomain" id="universityDomain" required>
+	   						<input placeholder="universityDomain.edu" type="text" class="form-control" name="universityDomain" id="universityDomain" required>
 						</div>
 					</div>
 				</div>
@@ -169,14 +169,14 @@
 </script>
 
 
-<form id="facultyRegistrationForm" method="POST" action="#">
+<form id="facultyRegistrationForm" method="POST" action="./emailVerification.php">
 	<div class="jumbotron text-center">
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-4">
 				</div>
 				<div class="col-sm-4 userDetails">
-					<h4>Personal Details (University Admin)</h4>
+					<h4>Personal Details (Faculty)</h4>
 						<div class="form-group">
 	   						<label for="firstName">First Name:</label>
 	   						<input placeholder="John" type="text" class="form-control" name="firstName" required>
@@ -194,17 +194,17 @@
 
   						<div class="form-group">
     						<label for="email">Email address:</label>
-    						<input placeholder="johndoe@abc.edu" type="email" class="form-control" name="facultyEmail" id="facultyEmail" required>
+    						<input placeholder="johndoe@universityName.edu" type="email" class="form-control" name="email" id="facultyEmail" required>
   						</div>
 
   						<div class="form-group">
     						<label for="password">Password:</label>
-    						<input pattern=".{3,}" title="3 characters minimum" type="password" class="form-control" name="password" id="password" required>
+    						<input placeholder="Minimum 5 characters" type="password" class="form-control" name="passwordFaculty" id="passwordFaculty" minlength=5 required>
   						</div>
 
   						<div class="form-group">
     						<label for="password">Confirm Password:</label>
-    						<input type="Password" class="form-control" name="confirmPassword" id="confirmPassword" required>
+    						<input type="Password" class="form-control" name="confirmPasswordFaculty" id="confirmPasswordFaculty" minlength=5 required>
   						</div>
 
   						<button type="submit" id="facultyRegButton" name="facultyRegistrationForm" class="buttonMargin btn btn-primary">Register</button>
@@ -221,7 +221,6 @@
 
 
 <script type="text/javascript">
-
 $('#facultyRegistrationForm').hide();
 $(document).ready(function(){
 	$('#registrationType').on('change', function (e) {
@@ -236,54 +235,43 @@ $(document).ready(function(){
 	    	$('#facultyRegistrationForm').hide();
 	    }
 	});
-		      			
-
-	$( "#facultyRegistrationForm" ).submit(function(e) {
-		$('#errorList').html('');
-		e.preventDefault();
-		var email = $('#facultyEmail').val();
-		var domain=email.split("@");
-		var errors="";
-
-		
-			$.ajax({
-	    		type: "GET",
-	    		url: "./functions/functions.php?domain="+domain[1],
-	    		dataType: "xml",
-	    		success: function(xml){
-		    		$(xml).find('login').each(function(){
-		      			var status = $(this).find('status').text();
-		      			if(status=='false'){
-		      				errors="University with Domain Name "+domain[1]+" Not Found.";
-		      				$("#errorList").append("<li>"+errors+"</li>");
-		      			}
-		      			var password=$('#password').val();
-						var confirmPassword=$('#confirmPassword').val();
-		      			if (password!==confirmPassword) {
-		      				errors="Passwords Do Not Match";
-		      				$("#errorList").append("<li>"+errors+"</li>");
-		      			}
-
-		      			if($('#errorList').children().length==0){
-		      				$('#facultyRegistrationForm').submit();
-		      			}
-		      			
-
-		    		});
-
-	  			},
-				error: function() {
-					alert("An error occurred while processing XML file.");
-				}
-	  		});
-	});
-
-
-
-
 });
+	$(document).ready(function(){
+    $("#facultyRegistrationForm").on('submit',function(e){
+    	e.preventDefault();
+    	var form=this;
+    	$('#errorList').html("");
+    	var facultyEmail=$('#facultyEmail').val();
+    	facultyEmail=facultyEmail.split('@');
+    		$.ajax({
+    			context:this,
+        		type: "GET",
+				url: "./functions/functions.php?domain="+facultyEmail[1],
+				dataType: "xml",
+				success: function(xml) {
+					$(xml).find('login').each(function(){
+		      			var status = $(this).find('status').text();
+		      			if (status=="true") {
+		      				var password=$('#passwordFaculty').val();
+    						var confirmPassword=$('#confirmPasswordFaculty').val();
+    						if (password===confirmPassword) {
+		      					form.submit();
+		      				}
+		      				else{
+		      					$('#errorList').append('<li>Passwords Do Not Match</li>');
+		      				}
+		      			}
+		      			else{
+		      				$('#errorList').append('<li>University Does not Exists.</li>');
+		      			}
+		      			
+		      			
+		      		});
 
-
+				}
+			});
+    });
+});
 </script>
 </body>
 </html>

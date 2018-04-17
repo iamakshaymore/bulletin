@@ -1,0 +1,65 @@
+<script type="text/javascript">
+
+$('#facultyRegistrationForm').hide();
+$(document).ready(function(){
+	$('#registrationType').on('change', function (e) {
+	    var optionSelected = $("option:selected", this);
+	    var valueSelected = this.value;
+	    if (valueSelected=='faculty') {
+	    	$('#universityRegistrationForm').hide();
+	    	$('#facultyRegistrationForm').show();
+	    }
+	    if (valueSelected=='university') {
+	    	$('#universityRegistrationForm').show();
+	    	$('#facultyRegistrationForm').hide();
+	    }
+	});
+		      			
+
+	$( "#facultyRegistrationForm" ).submit(function(e) {
+		$('#errorList').html('');
+		e.preventDefault();
+		var email = $('#facultyEmail').val();
+		var domain=email.split("@");
+		var errors="";
+
+		
+			$.ajax({
+	    		type: "GET",
+	    		url: "./functions/functions.php?domain="+domain[1],
+	    		dataType: "xml",
+	    		success: function(xml){
+		    		$(xml).find('login').each(function(){
+		      			var status = $(this).find('status').text();
+		      			if(status=='false'){
+		      				errors="University with Domain Name "+domain[1]+" Not Found.";
+		      				$("#errorList").append("<li>"+errors+"</li>");
+		      			}
+		      			var password=$('#password').val();
+						var confirmPassword=$('#confirmPassword').val();
+		      			if (password!==confirmPassword) {
+		      				errors="Passwords Do Not Match";
+		      				$("#errorList").append("<li>"+errors+"</li>");
+		      			}
+
+		      			if($('#errorList').children().length==0){
+		      				$('#facultyRegistrationForm').submit();
+		      			}
+		      			
+
+		    		});
+
+	  			},
+				error: function() {
+					alert("An error occurred while processing XML file.");
+				}
+	  		});
+	});
+
+
+
+
+});
+
+
+</script>
