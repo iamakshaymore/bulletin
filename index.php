@@ -4,13 +4,14 @@ include './functions/connection.php'
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Bulletin | Login</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="./style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon.png">
 </head>
 <body>
 <script type="text/javascript">
@@ -24,13 +25,14 @@ $(document).ready(function(){
 <div class="header">
 	<img src="./assets/logo.png">
 </div>
+
 <div class="jumbotron text-center">
 	<div class="container">
 	  <div class="row">
 	    <div class="col-sm-4">
 	    </div>
 	    <div class="col-sm-4 userDetails">
-	    	<form method="POST" action="#">
+	    	<form id="login" method="POST" action="#">
 	    		<div class="form-group">
 				 	<label for="email">Email address:</label>
 				 	<input type="email" class="form-control" id="email" name="email" required>
@@ -54,10 +56,27 @@ $(document).ready(function(){
 </div>
 </body>
 </html>
+<!--
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#login').on('submit',function(e){
+			if(navigator.onLine)
+        {
+            alert("Browser is online");
+        }
+        else
+        {
+            alert("Browser is offline");
+        }
+		});
 
+	});
+</script>
+-->
 <?php
 //error_reporting(E_ALL & ~E_NOTICE);
 if (isset($_POST['login'])) {
+
 	$email=$_POST['email'];
 	$password=$_POST['password'];
 	$sql="SELECT userPassword,userRole FROM user where userEmail='".$email."';";

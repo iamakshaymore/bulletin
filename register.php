@@ -109,6 +109,7 @@
 			</div>
 		</div>
 	</div>
+	<input type="hidden" name="userRole" value="universityadmin">
 </form>
 
 <script type="text/javascript">
@@ -216,6 +217,7 @@
 			</div>
 		</div>
 	</div>
+	<input type="hidden" name="userRole" value="faculty">
 </form>
 
 
